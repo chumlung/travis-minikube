@@ -19,3 +19,6 @@ script:
   - minikube version
   - kubectl version
   - docker version
+
+after_success:
+  - echo 'Successfully installed minikube and kubectl'
