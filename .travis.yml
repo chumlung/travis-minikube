@@ -1,7 +1,11 @@
 sudo: required
 
+language: minimal
+
+services: docker
+
 env:
-- CHANGE_MINIKUBE_NONE_USER=true
+  - CHANGE_MINIKUBE_NONE_USER=true
 
 install:
   - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
@@ -12,4 +16,6 @@ install:
   - sudo mv ./kubectl /usr/local/bin/kubectl
 
 script:
-- kubectl version
+  - minikube version
+  - kubectl version
+  - docker version
