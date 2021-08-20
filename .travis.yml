@@ -26,4 +26,4 @@ script:
   - kubectl apply -f ./krakend/deployment.yaml
   - kubectl apply -f ./krakend/service.yaml
   - kubectl apply -f ./rabbitmq/deployment.yaml
-  - kubectl get services
+  - kubectl get all

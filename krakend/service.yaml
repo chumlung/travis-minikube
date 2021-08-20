@@ -6,18 +6,18 @@ spec:
   type: NodePort
   ports:
   - name: http
+    env:
+    - name: FC_ENABLE
+      value: 1
+    - name: FC_SETTINGS
+      value: "/etc/krakend/settings"
+    - name: FC_TEMPLATES
+      value: "/etc/krakend/templates"
     port: 8000
     targetPort: 8080
     protocol: TCP
   selector:
     app: krakend
-  env:
-  - name: FC_ENABLE
-    value: 1
-  - name: FC_SETTINGS
-    value: "/etc/krakend/settings"
-  - name: FC_TEMPLATES
-    value: "/etc/krakend/templates"
 
 ---
 apiVersion: v1
