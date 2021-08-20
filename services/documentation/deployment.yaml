@@ -1,0 +1,31 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bl-documentation
+spec:
+  selector:
+    matchLabels:
+      app: bl-documentation
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: bl-documentation
+    spec:
+      containers:
+        - name: bl-documentation
+          image: bl/documentation:0.0.1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bl-documentation-cluster-ip
+spec:
+  ports:
+  - name: http
+    port: 3500
+    targetPort: 3500
+    protocol: TCP
+  selector:
+    app: bl-documentation

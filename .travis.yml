@@ -16,6 +16,14 @@ install:
   - sudo mv ./kubectl /usr/local/bin/kubectl
 
 script:
-  - docker build -t bl/courses:0.0.1 ./courses/
-  - kubectl apply -f ./courses/deployment.yaml
+  - docker build -t bl/courses:0.0.1 ./services/courses/
+  - kubectl apply -f ./services/courses/deployment.yaml
+  - docker build -t bl/logger:0.0.1 ./services/logger
+  - kubectl apply -f ./services/logger/deployment.yaml
+  - docker build -t bl/documentation:0.0.1 ./services/documentation
+  - kubectl apply -f ./services/documentation/deployment.yaml
+  - docker build -t bl/krakend:0.0.1 ./krakend
+  - kubectl apply -f ./krakend/deployment.yaml
+  - kubectl apply -f ./krakend/service.yaml
+  - kubectl apply -f ./rabbitmq/deployment.yaml
   - kubectl get services

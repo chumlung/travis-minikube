@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+  krakend:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    volumes:
+      - .:/etc/krakend/
+    ports:
+      - 8002:8080
+    environment:
+      FC_ENABLE: 1
+      FC_SETTINGS: "/etc/krakend/settings"
+      FC_TEMPLATES: "/etc/krakend/templates"

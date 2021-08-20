@@ -1,0 +1,53 @@
+{
+  "hosts": ["http://bl-course-cluster-ip:3000"],
+  "extra_config": {
+    "github.com/devopsfaith/krakend/proxy": {
+      "sequential": false
+    }
+  },
+  "endpoints": [
+    {
+      "method": "GET",
+      "endpoint": "/courses",
+      "url_pattern": "/courses",
+      "encoding": "json",
+      "target": "",
+      "is_collection": true,
+      "sd": "static",
+      "disable_host_sanitize": false
+    },
+    {
+      "endpoint": "/courses/{id}",
+      "method": "GET",
+      "encoding": "json",
+      "url_pattern": "/courses/{id}",
+      "sd": "static"
+    },
+    {
+      "endpoint": "/courses/{id}",
+      "method": "PUT",
+      "encoding": "json",
+      "extra_config": {},
+      "url_pattern": "/courses/{id}"
+    },
+    {
+      "endpoint": "/courses/{id}",
+      "method": "PATCH",
+      "encoding": "json",
+      "extra_config": {},
+      "url_pattern": "/courses/{id}"
+    },
+    {
+      "endpoint": "/courses/{id}",
+      "method": "DELETE",
+      "encoding": "json",
+      "extra_config": {},
+      "url_pattern": "/courses/{id}"
+    },
+    {
+      "endpoint": "/courses/documentation",
+      "method": "GET",
+      "url_pattern": "/explorer/openapi.json"
+    }
+  ]
+}

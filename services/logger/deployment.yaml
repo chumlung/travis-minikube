@@ -1,0 +1,23 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bl-logger
+spec:
+  selector:
+    matchLabels:
+      app: bl-logger
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: bl-logger
+    spec:
+      containers:
+        - name: bl-logger
+          image: bl/logger:0.0.1
+          env:
+          - name: PAPER_TRAIL_TOKEN
+            value: ZxIOYxe2Es1XO4oY1iemxeB8TmW8
+          - name: RABBIT_URL
+            value: amqp://rabbitmq-cluster-ip
