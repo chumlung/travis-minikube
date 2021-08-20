@@ -16,8 +16,6 @@ install:
   - sudo mv ./kubectl /usr/local/bin/kubectl
 
 script:
-  - minikube version
-  - kubectl version
-  - docker version
   - docker build -t bl/courses:0.0.1 ./courses/
   - kubectl apply -f ./courses/deployment.yaml
+  - kubectl get services
