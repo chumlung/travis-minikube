@@ -1,6 +1,6 @@
 sudo: required
 
-language: minimal
+language: node
 
 services: docker
 
@@ -19,6 +19,5 @@ script:
   - minikube version
   - kubectl version
   - docker version
-
-after_success:
-  - echo 'Successfully installed minikube and kubectl'
+  - docker build -t bl/courses:0.0.1 ./courses/
+  - kubectl apply -f ./courses/deployment.yaml

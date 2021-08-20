@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  ms_courses:
+    container_name: 'ms_courses'
+    build:
+      context: .
+      dockerfile: ./Dockerfile-dev
+    volumes:
+      - .:/app
+    links:
+      - courses_db
+    depends_on:
+      - courses_db
+    command: npm run dev
+    ports:
+      - 3001:3000
+      - 9230:9229
+    environment:
+      MONGO_URL: ${MONGO_URL:-mongodb://admin:password@courses_db:27017}
+
+  courses_db:
+    container_name: ms_db_courses
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: courses_db
+    volumes:
+      - courses_db_volume:/data/db
+    ports:
+      - 27018:27017
+
+volumes:
+  courses_db_volume: {}

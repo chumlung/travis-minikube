@@ -1,0 +1,57 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bl-courses
+spec:
+  selector:
+    matchLabels:
+      app: bl-courses
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: bl-courses
+    spec:
+      containers:
+        - name: bl-courses
+          image: bl/courses:0.0.1
+          ports:
+          - containerPort: 3000
+          env:
+          - name: MONGO_URL
+            value: mongodb+srv://bl-free:s3CO3NCVJKMzlzaY@cluster0.whacm.mongodb.net/blue-lightning?retryWrites=true&w=majority
+          - name: HOST
+            value: '0.0.0.0'
+          - name: PORT
+            value: '3000'
+          - name: RABBIT_URL
+            value: amqp://rabbitmq-cluster-ip
+          imagePullPolicy: Never
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bl-course-cluster-ip
+spec:
+  ports:
+  - name: http
+    port: 3000
+    targetPort: 3000
+    protocol: TCP
+  selector:
+    app: bl-courses
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bl-course-node
+spec:
+  type: NodePort
+  ports:
+  - name: http
+    port: 3000
+    targetPort: 3000
+    protocol: TCP
+  selector:
+    app: bl-courses
