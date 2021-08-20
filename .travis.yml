@@ -24,6 +24,6 @@ script:
   - kubectl apply -f ./services/documentation/deployment.yaml
   - docker build -t bl/krakend:0.0.1 ./krakend
   - kubectl apply -f ./krakend/deployment.yaml
-  - kubectl apply -f ./krakend/service.yaml
+  - kubectl apply -f ./krakend/service.yaml --validate=false
   - kubectl apply -f ./rabbitmq/deployment.yaml
   - kubectl get all
